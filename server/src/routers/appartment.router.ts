@@ -4,7 +4,7 @@ import {
   createAppartment,
   deleteAppartment,
   updateAppartment,
-} from "../controllers/appartmentController";
+} from "../controllers/appartment.controller";
 
 const appartmentsRouter = express.Router();
 

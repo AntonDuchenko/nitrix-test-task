@@ -1,5 +1,3 @@
-import "dotenv/config";
-import "./db";
 import createServer from "./createServer";
 
 const PORT = process.env.SERVER_PORT || 3000;
