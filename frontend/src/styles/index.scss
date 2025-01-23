@@ -8,22 +8,25 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #00000000;
+  color: #000000;
   background-color: #fef5f5;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --inline-padding: 20px;
 }
 
 a {
   font-weight: 500;
   color: #060fbc;
   text-decoration: inherit;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
-    color: #0612f7;
+    color: #882ceb;
   }
 }
 

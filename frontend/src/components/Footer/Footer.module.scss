@@ -1,0 +1,42 @@
+@import "../../styles/mixins";
+
+.footer {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  flex-wrap: wrap;
+  bottom: 0;
+  width: calc(100% - 20px);
+  border-top: 2px solid #375471;
+  padding: 20px var(--inline-padding);
+
+  @include onTablet {
+    flex-direction: row;
+
+    .leftPart,
+    .rightPart {
+      width: 50%;
+    }
+  }
+}
+
+.leftPart {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 10px;
+
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-left: 25px;
+}

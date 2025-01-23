@@ -1,0 +1,23 @@
+.logoIcon {
+  background: #060fbc;
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  color: #000000;
+  text-transform: uppercase;
+  height: 100%;
+  gap: 10px;
+  font-size: 28px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: #000000;
+    transform: scale(1.1);
+  }
+}
