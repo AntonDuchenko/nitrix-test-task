@@ -5,10 +5,11 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import {
-  useDeleteAppartmentMutation,
-  useGetAppartmentsQuery,
-} from "../../../../services/appartments";
+import { useDeleteAppartmentMutation } from "../../../../services/appartments";
+import { useAppDispatch } from "../../../../app/reduxHooks";
+import { setEditingAppartment } from "../../../../components/features/editingAppartment";
+import { toastError } from "../../../../utils/toastError";
+import { toastSuccess } from "../../../../utils/toastSuccess";
 
 interface AppartmentItemProps {
   setFavorites: React.Dispatch<React.SetStateAction<string[] | null>>;
@@ -22,13 +23,21 @@ export const AppartmentItem: React.FC<AppartmentItemProps> = ({
   setFavorites,
 }) => {
   const { _id, title, description, price, rooms, photo_url } = item;
-  const { data } = useGetAppartmentsQuery();
-  const [deleteAppartment] = useDeleteAppartmentMutation();
+  const [deleteAppartment, { error }] = useDeleteAppartmentMutation();
+  const dispatch = useAppDispatch();
 
   const handleDelete = async () => {
-    if (data) {
-      await deleteAppartment(_id).unwrap();
+    await deleteAppartment(_id).unwrap();
+
+    if (error) {
+      toastError("Something went wrong. Please try again later.");
     }
+
+    toastSuccess("Appartment deleted successfully");
+  };
+
+  const handleEdit = () => {
+    dispatch(setEditingAppartment(item));
   };
 
   const handleFavorite = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
@@ -82,7 +91,11 @@ export const AppartmentItem: React.FC<AppartmentItemProps> = ({
       </span>
 
       <div className={styles.actions}>
-        <ModeEditIcon className={styles.editIcon} fontSize="large" />
+        <ModeEditIcon
+          onClick={handleEdit}
+          className={styles.editIcon}
+          fontSize="large"
+        />
         <DeleteForeverOutlinedIcon
           sx={{
             color: "red",

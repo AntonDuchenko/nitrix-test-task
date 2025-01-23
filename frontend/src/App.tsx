@@ -1,17 +1,18 @@
-import { Route, Routes } from "react-router";
-import { AppartmentsPage } from "./pages/Appartments/Appartments";
-import { Navigate } from "react-router";
 import { Footer, Header } from "./components";
+import styles from "./App.module.scss";
+import { AppRouter } from "./components/Router/AppRouter";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <>
       <Header />
-      <Routes>
-        <Route path="/" element={<Navigate to="/appartments" />} />
-        <Route path="/appartments" element={<AppartmentsPage />} />
-      </Routes>
+      <div className={styles.container}>
+        <AppRouter />
+      </div>
       <Footer />
+      <ToastContainer newestOnTop />
     </>
   );
 }
