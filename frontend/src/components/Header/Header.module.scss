@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  border-bottom: 2px solid #375471;
+  padding-inline: 10px;
+  margin-bottom: 20px;
+}
+
+.logoIcon {
+  background: #060fbc;
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  color: #000000;
+  text-transform: uppercase;
+  height: 100%;
+  gap: 10px;
+  font-size: 28px;
+  font-weight: 600;
+}

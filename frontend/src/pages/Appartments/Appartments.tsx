@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import {
   useCreateAppartmentMutation,
   useDeleteAppartmentMutation,
@@ -44,12 +45,12 @@ export const AppartmentsPage = () => {
         "Loading..."
       ) : (
         <>
-          <button onClick={handleOnSubmit}>Add appartment</button>
-          <button onClick={handleOnDelete}>Delete appartment</button>
-          <button onClick={handleOnUpdate}>Update appartment</button>
-          {data?.map((appartment) => (
+          {/* <Button onClick={handleOnSubmit}>Add appartment</Button>
+          <Button onClick={handleOnDelete}>Delete appartment</Button>
+          <Button onClick={handleOnUpdate}>Update appartment</Button> */}
+          {/* {data?.map((appartment) => (
             <div key={appartment.id}>{appartment.title}</div>
-          ))}
+          ))} */}
         </>
       )}
     </div>
