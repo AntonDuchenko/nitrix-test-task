@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import {
   useCreateAppartmentMutation,
   useDeleteAppartmentMutation,
@@ -6,6 +5,7 @@ import {
   useUpdateAppartmentMutation,
 } from "../../services/appartments";
 import styles from "./Appartments.module.scss";
+import { AppartmentsList } from "./AppartmentsList/AppartmentsList";
 
 export const AppartmentsPage = () => {
   const [createAppartment] = useCreateAppartmentMutation();
@@ -45,6 +45,7 @@ export const AppartmentsPage = () => {
         "Loading..."
       ) : (
         <>
+          <AppartmentsList appartments={data} />
           {/* <Button onClick={handleOnSubmit}>Add appartment</Button>
           <Button onClick={handleOnDelete}>Delete appartment</Button>
           <Button onClick={handleOnUpdate}>Update appartment</Button> */}
