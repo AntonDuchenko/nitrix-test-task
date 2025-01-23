@@ -5,33 +5,56 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import { useState } from "react";
+import {
+  useDeleteAppartmentMutation,
+  useGetAppartmentsQuery,
+} from "../../../../services/appartments";
 
 interface AppartmentItemProps {
+  setFavorites: React.Dispatch<React.SetStateAction<string[] | null>>;
+  favorites: string[] | null;
   item: Appartment;
 }
 
-export const AppartmentItem: React.FC<AppartmentItemProps> = ({ item }) => {
-  const { title, description, price, rooms, photo_url } = item;
+export const AppartmentItem: React.FC<AppartmentItemProps> = ({
+  item,
+  favorites,
+  setFavorites,
+}) => {
+  const { _id, title, description, price, rooms, photo_url } = item;
+  const { data } = useGetAppartmentsQuery();
+  const [deleteAppartment] = useDeleteAppartmentMutation();
 
-  const [isFavorite, setIsFavorite] = useState(false);
+  const handleDelete = async () => {
+    if (data) {
+      await deleteAppartment(_id).unwrap();
+    }
+  };
 
   const handleFavorite = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     e.stopPropagation();
-    setIsFavorite(!isFavorite);
+    setFavorites((favorites) => {
+      if (favorites) {
+        if (favorites?.includes(_id)) {
+          return favorites.filter((id) => id !== _id);
+        } else {
+          return [...favorites, _id];
+        }
+      } else {
+        return [_id];
+      }
+    });
   };
 
   return (
     <div className={styles.appartmentItem}>
-      {isFavorite ? (
+      {favorites?.includes(_id) ? (
         <FavoriteIcon
           onClick={handleFavorite}
-          type="button"
           className={styles.favoriteIcon}
         />
       ) : (
         <FavoriteBorderOutlinedIcon
-          type="button"
           onClick={handleFavorite}
           className={styles.favoriteIcon}
         />
@@ -59,12 +82,12 @@ export const AppartmentItem: React.FC<AppartmentItemProps> = ({ item }) => {
       </span>
 
       <div className={styles.actions}>
-        <ModeEditIcon className={styles.editIcon} fontSize="large" type="button" />
+        <ModeEditIcon className={styles.editIcon} fontSize="large" />
         <DeleteForeverOutlinedIcon
           sx={{
             color: "red",
           }}
-          type="button"
+          onClick={handleDelete}
           fontSize="large"
           className={styles.deleteIcon}
         />

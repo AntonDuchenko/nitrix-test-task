@@ -1,6 +1,5 @@
 import {
   useCreateAppartmentMutation,
-  useDeleteAppartmentMutation,
   useGetAppartmentsQuery,
   useUpdateAppartmentMutation,
 } from "../../services/appartments";
@@ -9,7 +8,6 @@ import { AppartmentsList } from "./AppartmentsList/AppartmentsList";
 
 export const AppartmentsPage = () => {
   const [createAppartment] = useCreateAppartmentMutation();
-  const [deleteAppartment] = useDeleteAppartmentMutation();
   const [updateAppartment] = useUpdateAppartmentMutation();
 
   const { data, isLoading } = useGetAppartmentsQuery();
@@ -30,12 +28,6 @@ export const AppartmentsPage = () => {
         title: "new title",
         price: 1234124,
       }).unwrap();
-    }
-  };
-
-  const handleOnDelete = async () => {
-    if (data) {
-      await deleteAppartment(data[0].id).unwrap();
     }
   };
 
