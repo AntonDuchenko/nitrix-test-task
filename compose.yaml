@@ -1,14 +1,14 @@
 services:
   backend:
     build: 
-      context: /server/
+      context: ./server/
       dockerfile: Dockerfile
     restart: on-failure
     ports:
-      - 3001:3000
+      - 3001:3001
   app:
     build:
-      context: /frontend/
+      context: ./frontend/
       dockerfile: Dockerfile
     ports:
       - 5173:3000
