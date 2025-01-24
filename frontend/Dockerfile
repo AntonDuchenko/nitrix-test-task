@@ -8,6 +8,8 @@ RUN npm install
 
 RUN npm i -g serve
 
+COPY .env.sample .env
+
 COPY . .
 
 RUN npm run build
