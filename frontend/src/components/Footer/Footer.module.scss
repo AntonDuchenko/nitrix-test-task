@@ -1,12 +1,18 @@
-@import "../../styles/mixins";
+@use "../../styles/mixins" as *;
 
 .footer {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   border-top: 2px solid #375471;
   padding: 20px var(--inline-padding);
   background: #cdcbcb56;
+}
+
+.container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: var(--min-width);
+  max-width: var(--max-width);
 
   @include onTablet {
     flex-direction: row;
@@ -40,9 +46,17 @@
   text-align: center;
 }
 
+.name {
+  font-weight: 600;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
 .contactList {
   display: flex;
   flex-direction: column;
   gap: 5px;
   padding-left: 25px;
+  text-align: right;
+  list-style: none;
 }

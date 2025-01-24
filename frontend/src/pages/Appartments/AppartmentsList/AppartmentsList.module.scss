@@ -1,3 +1,11 @@
-.appartmentsList {
-  padding-inline: var(--inline-padding);
+@use "../../../styles/mixins.scss" as *;
+
+.params {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include onTablet {
+    flex-direction: row;
+  }
 }

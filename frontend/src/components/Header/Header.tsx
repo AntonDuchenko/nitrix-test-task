@@ -14,13 +14,15 @@ export const Header = () => {
 
   return (
     <div className={styles.header}>
-      <Logo />
+      <div className={styles.container}>
+        <Logo />
 
-      <Button onClick={handleOpen} variant="contained">
-        Add appartment
-      </Button>
+        <Button onClick={handleOpen} variant="contained">
+          Add appartment
+        </Button>
 
-      <CreaeteModal open={isOpen} setIsOpen={setIsOpen} />
+        <CreaeteModal open={isOpen} setIsOpen={setIsOpen} />
+      </div>
     </div>
   );
 };

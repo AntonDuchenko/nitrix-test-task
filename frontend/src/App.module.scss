@@ -1,5 +1,14 @@
+@use "./styles/mixins.scss" as *;
+
 .container {
-  min-height: calc(100vh - 390px);
-  padding: 20px 0;
+  margin: 0 auto;
+  min-height: calc(100vh - 530px);
+  padding: 20px var(--inline-padding);
   overflow: auto;
+  min-width: var(--min-width);
+  max-width: var(--max-width);
+
+  @include onTablet {
+    min-height: calc(100vh - 395px);
+  }
 }

@@ -1,9 +1,7 @@
 :root {
   margin: 0 auto;
-  min-width: 320px;
-  max-width: 1440px;
   min-height: 100vh;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -17,6 +15,8 @@
   -moz-osx-font-smoothing: grayscale;
 
   --inline-padding: 20px;
+  --min-width: 280px;
+  --max-width: 1440px;
 }
 
 a {

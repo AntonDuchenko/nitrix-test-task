@@ -22,14 +22,7 @@ export const createAppartment = async (req: Request, res: Response) => {
   try {
     const newAppartment = await createAppartmnent(req.body);
 
-    res.status(codeStatuses.CREATED_CODE_STATUS).send({
-      id: newAppartment._id,
-      title: newAppartment.title,
-      description: newAppartment.description,
-      price: newAppartment.price,
-      rooms: newAppartment.rooms,
-      photo_url: newAppartment.photo_url,
-    });
+    res.status(codeStatuses.CREATED_CODE_STATUS).send(newAppartment);
   } catch (error) {
     handleError(error, res);
   }

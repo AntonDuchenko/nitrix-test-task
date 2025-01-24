@@ -1,5 +1,7 @@
 import { Loader } from "../../components/Loader/Loader";
+import ImageEnum from "../../ImageEnum";
 import { useGetAppartmentsQuery } from "../../services/appartments";
+import styles from "./Appartments.module.scss";
 import { AppartmentsList } from "./AppartmentsList/AppartmentsList";
 
 export const AppartmentsPage = () => {
@@ -12,7 +14,11 @@ export const AppartmentsPage = () => {
       ) : data && data?.length > 0 ? (
         <AppartmentsList appartments={data} />
       ) : (
-        "No appartments"
+        <img
+          src={ImageEnum.EmptyList}
+          alt="Empty list image"
+          className={styles.emptyImage}
+        />
       )}
     </>
   );
