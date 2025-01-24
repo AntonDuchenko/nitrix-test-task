@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import appartment from "./models/appartment";
+import { properties } from "./appartmentSeed";
 
 const MONGO_URI = process.env.MONGO_URI || "";
 
@@ -12,5 +14,19 @@ function connectDB() {
       console.error("Error connecting to MongoDB:", error);
     });
 }
+
+export async function seedData() {
+  try {
+    await appartment.deleteMany({});
+
+    await appartment.insertMany(properties);
+    console.log("Data seeded successfully");
+  } catch (err) {
+    console.error("Error seeding data:", err);
+    mongoose.connection.close();
+  }
+}
+
+seedData();
 
 export default connectDB;
