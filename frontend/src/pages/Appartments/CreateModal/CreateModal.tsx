@@ -98,7 +98,9 @@ export const CreaeteModal: React.FC<CreaeteModalProps> = ({
   return (
     <Modal open={open || !!editingAppartment}>
       <div className={styles.modal}>
-        <div className={styles.title}>Create appartment</div>
+        <div className={styles.title}>
+          {editingAppartment ? "Edit" : "Create"} appartment
+        </div>
 
         <CloseIcon onClick={handleOnClose} className={styles.closeIcon} />
 
@@ -110,6 +112,7 @@ export const CreaeteModal: React.FC<CreaeteModalProps> = ({
             variant="standard"
             {...register("title", {
               required: "Title is required",
+              setValueAs: (value) => value.trim(),
               maxLength: {
                 value: 90,
                 message: "Title cannot exceed 90 characters",
@@ -131,6 +134,7 @@ export const CreaeteModal: React.FC<CreaeteModalProps> = ({
             maxRows={4}
             {...register("description", {
               required: "Description is required",
+              setValueAs: (value) => value.trim(),
               maxLength: {
                 value: 335,
                 message: "Title cannot exceed 335 characters",
