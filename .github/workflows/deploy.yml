@@ -28,6 +28,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << EOF
             echo "Connected to EC2 instance"
+            cd nitrix/nitrix-test-task/
             git pull origin main      # Pull the latest changes from your GitHub repository
             docker-compose down       # Stop the existing Docker containers
             docker-compose build      # Build the new Docker image
