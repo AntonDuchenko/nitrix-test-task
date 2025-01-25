@@ -36,7 +36,7 @@ This project is an Apartment Management System that allows users to view availab
 
    ```bash
    git clone https://github.com/AntonDuchenko/nitrix-test-task.git
-   cd apartment-management-system
+   cd nitrix-test-task
    ```
 
 2. Install dependencies:
