@@ -20,7 +20,6 @@ export const AppartmentsPage = () => {
           className={styles.emptyImage}
         />
       )}
-      <span>v 1.0</span>
     </>
   );
 };
