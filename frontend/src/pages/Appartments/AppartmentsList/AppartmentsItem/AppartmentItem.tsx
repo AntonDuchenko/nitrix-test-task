@@ -70,9 +70,9 @@ export const AppartmentItem: React.FC<AppartmentItemProps> = ({
       )}
 
       {photo_url ? (
-        <img src={photo_url} alt="" />
+        <img src={photo_url} className={styles.image} />
       ) : (
-        <div className={styles.image}></div>
+        <div className={styles.emptyImage}></div>
       )}
 
       <span className={styles.price}>${price}/month</span>

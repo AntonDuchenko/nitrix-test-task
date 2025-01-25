@@ -19,9 +19,11 @@ import {
 } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../app/reduxHooks";
 import { setEditingAppartment } from "../../../components/features/editingAppartment";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toastSuccess } from "../../../utils/toastSuccess";
 import { toastError } from "../../../utils/toastError";
+import ImageEnum from "../../../ImageEnum";
+import classNames from "classnames";
 
 interface CreaeteModalProps {
   open: boolean;
@@ -40,6 +42,8 @@ export const CreaeteModal: React.FC<CreaeteModalProps> = ({
     (state) => state.appartment.editingAppartment
   );
   const dispatch = useAppDispatch();
+  const [file, setFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
 
   const {
     register,
@@ -66,6 +70,8 @@ export const CreaeteModal: React.FC<CreaeteModalProps> = ({
   const handleOnClose = () => {
     reset();
     setIsOpen(false);
+    setFile(null);
+    setPreview(null);
 
     if (editingAppartment) {
       dispatch(setEditingAppartment(null));
@@ -73,22 +79,26 @@ export const CreaeteModal: React.FC<CreaeteModalProps> = ({
   };
 
   const handleOnSubmit = async (data: IFormInput) => {
+    const formData = new FormData();
+
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("price", data.price.toString());
+    formData.append("rooms", data.rooms.toString());
+
+    if (file) {
+      formData.append("image", file);
+    }
+
+    console.log(formData);
+
     if (editingAppartment) {
-      await updateAppartment({
-        _id: editingAppartment._id,
-        title: data.title,
-        description: data.description,
-        price: data.price,
-        rooms: data.rooms,
-      }).unwrap();
+      formData.append("_id", editingAppartment._id);
+
+      await updateAppartment(formData).unwrap();
       toastSuccess("Appartment edited successfully");
     } else {
-      await createAppartment({
-        title: data.title,
-        description: data.description,
-        price: data.price,
-        rooms: data.rooms,
-      }).unwrap();
+      await createAppartment(formData).unwrap();
 
       if (error) {
         toastError("Something went wrong. Please try again later.");
@@ -97,6 +107,15 @@ export const CreaeteModal: React.FC<CreaeteModalProps> = ({
       toastSuccess("Appartment created successfully");
     }
     handleOnClose();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+
+      const imageUrl = URL.createObjectURL(e.target.files[0]);
+      setPreview(imageUrl);
+    }
   };
 
   return (
@@ -109,6 +128,20 @@ export const CreaeteModal: React.FC<CreaeteModalProps> = ({
         <CloseIcon onClick={handleOnClose} className={styles.closeIcon} />
 
         <form className={styles.form} onSubmit={handleSubmit(handleOnSubmit)}>
+          <div className={styles.addIcon}>
+            <input
+              type="file"
+              accept="image/*"
+              className={styles.addInput}
+              onChange={handleFileChange}
+            />
+            <img
+              src={preview ? preview : ImageEnum.AddIcon}
+              className={classNames({
+                [styles.image]: preview,
+              })}
+            />
+          </div>
           <TextField
             fullWidth
             error={!!errors.title}

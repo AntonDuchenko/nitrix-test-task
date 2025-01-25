@@ -28,3 +28,43 @@
   flex-direction: column;
   gap: 20px;
 }
+
+.addInput {
+  opacity: 0;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.addIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 20vh;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(132, 128, 126, 0.9) 0%, rgba(51, 51, 51, 0.9) 100%);
+  margin-bottom: 24px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    padding: 3.1px;
+    background: linear-gradient(180deg, #CECDC8 0%, #4B4A48 100%);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+}
+
+.image {
+  height: 100%;
+}

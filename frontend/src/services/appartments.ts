@@ -11,7 +11,7 @@ export const appartamentsApi = createApi({
       providesTags: ["Appartments"],
     }),
     createAppartment: builder.mutation({
-      query: (newAppartment: Omit<Appartment, "_id">) => ({
+      query: (newAppartment: FormData) => ({
         url: "/appartments",
         method: "POST",
         body: newAppartment,
@@ -26,8 +26,8 @@ export const appartamentsApi = createApi({
       invalidatesTags: ["Appartments"],
     }),
     updateAppartment: builder.mutation({
-      query: (updatedAppartment: Appartment) => ({
-        url: `/appartments/${updatedAppartment._id}`,
+      query: (updatedAppartment: FormData) => ({
+        url: `/appartments/${updatedAppartment.get("_id")}`,
         method: "PUT",
         body: updatedAppartment,
       }),

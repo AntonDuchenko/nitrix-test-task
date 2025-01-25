@@ -7,6 +7,7 @@ import {
   updateAppartmentById,
 } from "../services/appartment.service";
 import codeStatuses from "../constants";
+import { uploadToS3 } from "../services/upload.service";
 
 export const getAppartments = async (_: Request, res: Response) => {
   try {
@@ -20,7 +21,21 @@ export const getAppartments = async (_: Request, res: Response) => {
 
 export const createAppartment = async (req: Request, res: Response) => {
   try {
-    const newAppartment = await createAppartmnent(req.body);
+    const { file, body } = req;
+
+    if (!file) {
+      return;
+    }
+
+    const photo_url = (await uploadToS3(
+      file,
+      process.env.AWS_S3_BUCKET_NAME || "",
+    )) as AWS.S3.ManagedUpload.SendData;
+
+    const newAppartment = await createAppartmnent({
+      ...body,
+      photo_url: photo_url.Location,
+    });
 
     res.status(codeStatuses.CREATED_CODE_STATUS).send(newAppartment);
   } catch (error) {
