@@ -48,7 +48,11 @@ export const CreaeteModal: React.FC<CreaeteModalProps> = ({
     setValue,
     handleSubmit,
     reset,
-  } = useForm<IFormInput>();
+  } = useForm<IFormInput>({
+    defaultValues: {
+      rooms: 0,
+    },
+  });
 
   useEffect(() => {
     if (editingAppartment) {
