@@ -2,8 +2,6 @@
 
 This project is an Apartment Management System that allows users to view available apartments, as well as create, delete, and edit apartment listings. It is built with **Express.js** for the backend, **React.js** for the frontend, and uses **Mongoose** to interact with the MongoDB database. State management is handled using **Redux Toolkit** and **RTK Query**.
 
-[Demo Link](http://54.172.221.68:5173/)
-
 ## Features
 
 - **View Available Apartments**: Display a list of apartments with details such as name, location, price, etc.
